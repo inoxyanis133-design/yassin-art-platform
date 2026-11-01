@@ -1,0 +1,5 @@
+'use client';
+import { useState } from 'react';
+import { Heart, ArrowUpLeft } from 'lucide-react';
+import { paypalUrl } from '@/lib/books';
+export function Support(){const [amount,setAmount]=useState('30');return <section id="support" className="support-section"><div><span className="eyebrow"><Heart size={15}/> لأنّ الحكاية تستحق أن تستمر</span><h2>كن ضوءًا في هذه المساحة.</h2><p>القراءة هنا مجانية، وستبقى كذلك. مساهمتك الصغيرة تساعدنا<br className="desktop-break"/> على احتضان نصوص جديدة، وفتح نوافذ أخرى للإبداع.</p></div><div className="support-action"><div className="donation-choices" role="group" aria-label="مبلغ التبرع المقترح بالدرهم">{['10','30','50'].map(a=><button key={a} aria-pressed={amount===a} className={amount===a?'selected':''} onClick={()=>setAmount(a)}>{a} <small>د.م.</small></button>)}</div><a className="button button-primary" href={paypalUrl} target="_blank" rel="noopener noreferrer">ادعم ياسين آرت <Heart size={16}/></a><small>تبرّع اختياري · أدخل ما يعادل {amount} درهمًا بعملة PayPal المتاحة.</small></div></section>;}

@@ -1,0 +1,1 @@
+export default function Loading(){return <main id="main" className="inner-main page-width" aria-label="جارٍ تحميل الصفحة"><div className="skeleton"/><div className="skeleton" style={{height:140,marginTop:25}}/></main>;}

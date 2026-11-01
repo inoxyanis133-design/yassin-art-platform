@@ -1,0 +1,7 @@
+import { GoogleGenAI } from '@google/genai';
+import { writeFile } from 'node:fs/promises';
+const ai = new GoogleGenAI({ apiKey:process.env.NETLIFY_AI_GATEWAY_KEY, httpOptions:{baseUrl:process.env.NETLIFY_AI_GATEWAY_URL?.replace(/\/$/,'')} });
+try {
+ const res = await ai.models.generateContent({model:'gemini-3.1-flash-image',contents:'Create a cinematic fine-art photograph for a premium Arabic literary magazine. Wide landscape 3:2. A large aged open book with beautifully curved ivory pages sitting on a weathered charcoal rock in the foreground, a small brass lantern with a candle beside it on the left. Behind, a deep dark teal misty mountain valley, soft silhouettes of distant mountains, a very small golden crescent moon high in the sky. Restrained warm copper and muted amber light illuminating the pages against cold charcoal teal night. Ethereal delicate wisps of mist. Film grain, beautiful chiaroscuro, photoreal tactile paper detail, contemplative literary mood, sophisticated editorial still life, deeply dark edges fading into charcoal. No text, no lettering, no people, no watermarks.',config:{responseModalities:['IMAGE','TEXT']}});
+ for(const p of res.candidates?.[0]?.content?.parts??[]) if(p.inlineData?.data) {await writeFile('public/img/literary-night.png',Buffer.from(p.inlineData.data,'base64'));console.log('Literary night artwork saved.');break;}
+} catch { console.log('Artwork generation unavailable; using the local illustrated fallback.'); }
